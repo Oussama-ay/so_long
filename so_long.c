@@ -6,11 +6,13 @@
 /*   By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:34:02 by oayyoub           #+#    #+#             */
-/*   Updated: 2024/12/25 20:20:11 by oayyoub          ###   ########.fr       */
+/*   Updated: 2024/12/26 09:39:45 by oayyoub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	finish_game(t_game *game, int x);
 
 void delay_ms(int delay_time)
 {
@@ -26,14 +28,54 @@ void draw_tile(t_game *game, int x, int y, void *sprite)
 	int i;
 
 	i = 0;
-	if (game->map.grid[y][x] == 'C' && game->sprites.collectible)
+	if (game->attack)
+	{
+		if (game->current_frame_player < 4)
+		{
+			mlx_put_image_to_window(game->mlx, game->win,
+				game->sprites.boy_lose[game->current_frame_player], game->player_x * 64, game->player_y * 64);
+			game->current_frame_player = game->current_frame_player + 1;
+		}
+		else if (game->current_frame_player < 90000000)
+			finish_game(game, 0);
+		game->current_frame_player = game->current_frame_player + 1;
+		delay_ms(90000000);
+	}
+	else if (game->map.grid[y][x] == 'C' && game->sprites.collectible)
 	{
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->sprites.collectible[game->current_frame_coin], x * 64, y * 64);
 		game->current_frame_coin = (game->current_frame_coin + 1) % 18;
 		delay_ms(90000000);
 	}
-	else if (game->map.grid[y][x] == 'P' && game->sprites.player)
+	else if (game->map.grid[y][x] == 'P' && game->sprites.player_up && game->player_direction == 1)
+	{
+		game->player_x = x;
+		game->player_y = y;
+		mlx_put_image_to_window(game->mlx, game->win,
+			game->sprites.player_up[game->current_frame_player], x * 64, y * 64);
+		game->current_frame_player = (game->current_frame_player + 1) % 6;
+		delay_ms(90000000);
+	}
+	else if (game->map.grid[y][x] == 'P' && game->sprites.player_left && game->player_direction == 2)
+	{
+		game->player_x = x;
+		game->player_y = y;
+		mlx_put_image_to_window(game->mlx, game->win,
+			game->sprites.player_left[game->current_frame_player], x * 64, y * 64);
+		game->current_frame_player = (game->current_frame_player + 1) % 6;
+		delay_ms(90000000);
+	}
+	else if (game->map.grid[y][x] == 'P' && game->sprites.player_right && game->player_direction == 3)
+	{
+		game->player_x = x;
+		game->player_y = y;
+		mlx_put_image_to_window(game->mlx, game->win,
+			game->sprites.player_right[game->current_frame_player], x * 64, y * 64);
+		game->current_frame_player = (game->current_frame_player + 1) % 6;
+		delay_ms(90000000);
+	}
+	else if (game->map.grid[y][x] == 'P' && game->sprites.player && game->player_direction == 4)
 	{
 		game->player_x = x;
 		game->player_y = y;
@@ -47,14 +89,14 @@ void draw_tile(t_game *game, int x, int y, void *sprite)
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->sprites.boss[game->current_frame_boss], x * 64, y * 64);
 		game->current_frame_boss = (game->current_frame_boss + 1) % 6;
-		delay_ms(20000000);
+		delay_ms(90000000);
 	}
 	else if (game->map.grid[y][x] == 'E' && game->finish && game->current_frame_exit < 4)
 	{
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->sprites.exit_animation[game->current_frame_exit], x * 64, y * 64);
 		game->current_frame_exit = (game->current_frame_exit + 1);
-		delay_ms(900000000);
+		delay_ms(700000000);
 	}
 	else if (game->finish && game->map.grid[y][x] == 'E')
 		mlx_put_image_to_window(game->mlx, game->win, game->sprites.exit_open, x * 64, y * 64);
@@ -93,6 +135,15 @@ int render_map(t_game *game)
 	return (0);
 }
 
+int	finish_game(t_game *game, int x)
+{
+	if (x)
+		print_error ("You win nice\n");
+	else
+		print_error ("You lose\n");
+	close_window(game);
+	exit (1);
+}
 
 void	ft_player_move(t_game *game, int new_y, int new_x, int player_sprite)
 {
@@ -101,9 +152,17 @@ void	ft_player_move(t_game *game, int new_y, int new_x, int player_sprite)
 
 	last_x = game->player_x;
 	last_y = game->player_y;
-	// if (game->map.grid[new_y][new_x] == 'E' && game->map.coins == 0)
-	// 	ft_victory(game);
-	if ((game->map.grid[new_y][new_x] == '0')
+	if (game->map.grid[new_y][new_x] == 'E' && game->map.coins == 0)
+		finish_game(game, 1);
+	else if (game->map.grid[new_y][new_x] == 'B')
+	{
+		game->attack = 1;
+		game->map.grid[new_x][new_x] = 'P';
+		game->current_frame_boss = 0;
+		game->current_frame_player = 0;
+		render_map(game);
+	}
+	else if ((game->map.grid[new_y][new_x] == '0')
 	|| (game->map.grid[new_y][new_x] == 'C'))
 	{
 		game->map.grid[last_y][last_x] = '0';
@@ -133,6 +192,8 @@ int handle_keypress(int keycode, t_game *game)
 		ft_player_move(game, game->player_y + 1, game->player_x, 4);
     else if (keycode == XK_Escape)
 		close_window(game);
+	else if (keycode == XK_q)
+		finish_game(game, 0);
     return (0);
 }
 

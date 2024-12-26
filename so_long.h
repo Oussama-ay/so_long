@@ -6,7 +6,7 @@
 /*   By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:34:34 by oayyoub           #+#    #+#             */
-/*   Updated: 2024/12/25 20:22:41 by oayyoub          ###   ########.fr       */
+/*   Updated: 2024/12/26 09:36:46 by oayyoub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ typedef struct s_sprites
 	void	**player_right;
 	void	**player_left;
 	void	**player_up;
+	void	**attack;
 	void	**boss;
+	void	**boy_lose;
 	int		width;
 	int		height;
 }	t_sprites;
@@ -62,6 +64,7 @@ typedef struct s_game
 	int			player_direction;
 	int			player_x;
 	int			player_y;
+	int			attack;
 	int			finish;
 }	t_game;
 

@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   check_errors _bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/24 14:10:43 by oayyoub           #+#    #+#             */
-/*   Updated: 2024/12/26 20:08:43 by oayyoub          ###   ########.fr       */
+/*   Created: 2024/12/24 13:49:04 by oayyoub           #+#    #+#             */
+/*   Updated: 2024/12/26 13:03:24 by oayyoub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "so_long_bonus.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
-
-char	*get_next_line(int fd);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strdup(const char *s);
-
-# define BUFFER_SIZE 10
-
-#endif
+void	print_error(char *str)
+{
+	while (*str)
+		write (2, str++, 1);
+}

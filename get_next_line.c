@@ -6,7 +6,7 @@
 /*   By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 14:09:14 by oayyoub           #+#    #+#             */
-/*   Updated: 2024/12/24 14:10:06 by oayyoub          ###   ########.fr       */
+/*   Updated: 2024/12/26 22:51:57 by oayyoub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static char	*extract_line(char **save, char *newline)
 
 	if (newline)
 	{
-		line = ft_strndup(*save, newline - *save + 1);
+		line = ft_strndup(*save, newline - *save);
 		tmp = ft_strdup(newline + 1);
 		free(*save);
 		if (*tmp == '\0')

@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   handel_input_output_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/24 14:10:43 by oayyoub           #+#    #+#             */
-/*   Updated: 2024/12/26 20:08:43 by oayyoub          ###   ########.fr       */
+/*   Created: 2024/12/26 14:22:15 by oayyoub           #+#    #+#             */
+/*   Updated: 2024/12/27 09:31:13 by oayyoub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "utils.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
+static void delay_ms(int delay_time)
+{
+	int	start_time;
 
-char	*get_next_line(int fd);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strdup(const char *s);
+	start_time = 0;
+	while (start_time < delay_time)
+		start_time++;
+}
 
-# define BUFFER_SIZE 10
-
-#endif
+void	stream (t_game *game, void **frames, int i, t_cord cord)
+{
+	if (!frames || !frames[i])
+        return;
+	mlx_put_image_to_window(game->mlx, game->win, frames[i], cord.x * 64, cord.y * 64);
+	delay_ms(90000000);
+	i++;
+}

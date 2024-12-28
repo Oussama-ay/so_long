@@ -6,7 +6,7 @@
 /*   By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 14:59:32 by oayyoub           #+#    #+#             */
-/*   Updated: 2024/12/27 10:11:28 by oayyoub          ###   ########.fr       */
+/*   Updated: 2024/12/27 15:38:52 by oayyoub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
-
+#include <stdio.h>
 void	_setup(t_game *game)
 {
 	game->mlx = NULL;
@@ -63,5 +63,8 @@ void	_setup(t_game *game)
 	game->finish = 0;
 	game->movements = 0;
 	game->player_direction = 4;
-	game->map.columns = ft_strlen (game->map.grid[0]);
+	game->map.columns = ft_strlen (game->map.grid[0]) + 1;
+	printf("columns: %d\n", game->map.columns);
+	printf("game->grid[0]: %s\n", game->map.grid[0]);
+	printf("ft_strlen: %d\n", ft_strlen(game->map.grid[0]));
 }

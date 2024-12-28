@@ -6,7 +6,7 @@
 /*   By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:34:02 by oayyoub           #+#    #+#             */
-/*   Updated: 2024/12/27 10:10:21 by oayyoub          ###   ########.fr       */
+/*   Updated: 2024/12/28 10:10:55 by oayyoub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int main(int ac, char **av)
 	if (ac != 2)
 		return (write(2, "Error: Invalid number of arguments\n", 33));
 	read_map (av[1], &game);
-	// if (!validate_map(&game))
-	// {
-	// 	free_map(&game.map);
-	// 	return (write(2, "Error: Invalid map\n", 19));
-	// }
+	if (!validate_map(&game))
+	{
+		free_map(game.map.grid, game.map.rows);
+		return (write(2, "Error: Invalid map\n", 19));
+	}
 	_setup (&game);
 	open_window (&game);
 

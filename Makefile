@@ -6,7 +6,7 @@
 #    By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/18 21:29:09 by oayyoub           #+#    #+#              #
-#    Updated: 2024/12/27 09:20:26 by oayyoub          ###   ########.fr        #
+#    Updated: 2024/12/28 10:17:17 by oayyoub          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LIBS = -Lminilibx-linux -lmlx_Linux -lX11 -lXext
 INCLUDES = -Iincludes
 LIB_NAME = lib$(NAME).a
 
-all: $(NAME)
+all: $(NAME) lclean
 
 $(NAME): $(LIB_NAME)
 	$(CC) -o $(NAME) $(LIB_NAME) $(LIBS)
@@ -35,7 +35,10 @@ $(LIB_NAME): $(OBJ)
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-clean:
+lclean:
+	rm -f $(LIB_NAME)
+
+clean: lclean
 	rm -f $(OBJ)
 
 fclean: clean

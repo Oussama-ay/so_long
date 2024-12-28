@@ -6,12 +6,12 @@
 /*   By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 13:49:04 by oayyoub           #+#    #+#             */
-/*   Updated: 2024/12/28 10:15:18 by oayyoub          ###   ########.fr       */
+/*   Updated: 2024/12/28 17:37:17 by oayyoub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-#include <stdio.h>
+
 static int	valid_char(char c)
 {
 	return (c == '0' || c == '1' || c == 'P'
@@ -104,12 +104,12 @@ int	validate_map(t_game *game)
 	if (!is_surrounded_by_walls(game->map.grid, game->map.rows, cols))
 		return (print_error("Error: Map is not surrounded by walls\n"), 0);
 	if (counts[0] != 1 || counts[1] != 1 || counts[2] < 1)
-		return (print_error("Error: (One 'P'),(One 'E'), (At lest one'C')\n"), 0);
+		return (print_error("Error: (One 'P'),(One 'E'), (At lest one 'C')\n"), 0);
 	(1) && (test.coins = 0, test.exit = 0);
 	grid_copy = ft_copy_map(game);
 	flood_fill(grid_copy, game->map.rows, cols, player.x, player.y, &test);
-	for (int i = 0; i < game->map.rows; i++)
-		printf("%s\n", grid_copy[i]);
+	if (!test.exit || test.coins != game->map.coins)
+		return (free_map(grid_copy, game->map.rows), print_error("Error: Map is not valid\n"), 0);
 	free_map(grid_copy, game->map.rows);
 	return (1);
 }

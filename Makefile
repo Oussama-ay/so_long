@@ -6,40 +6,42 @@
 #    By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/18 21:29:09 by oayyoub           #+#    #+#              #
-#    Updated: 2024/12/28 10:17:17 by oayyoub          ###   ########.fr        #
+#    Updated: 2024/12/28 21:08:51 by oayyoub          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
-CC = cc -g
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SRC =	so_long.c setup_game.c free_memory.c handel_input_output.c handel_input_output_2.c\
-		get_next_line.c get_next_line_utils.c free_memory.c\
-		read_the_map.c setup_game.c setup_sprites_1.c setup_sprites_2.c
+		get_next_line.c get_next_line_utils.c read_the_map.c setup_sprites_1.c setup_sprites_2.c
 MANDATORY = check_errors.c
 BONUS = check_errors_bonus.c
+LIBS = -Lminilibx-linux -lmlx_Linux -lX11 -lXext
 OBJ = $(SRC:.c=.o) $(MANDATORY:.c=.o)
 OBJ_BONUS = $(SRC:.c=.o) $(BONUS:.c=.o)
-LIBS = -Lminilibx-linux -lmlx_Linux -lX11 -lXext
-INCLUDES = -Iincludes
-LIB_NAME = lib$(NAME).a
 
-all: $(NAME) lclean
+all: check_bonus $(NAME) 
 
-$(NAME): $(LIB_NAME)
-	$(CC) -o $(NAME) $(LIB_NAME) $(LIBS)
+check_bonus:
+	@if [ -f check_errors_bonus.o ]; then\
+		rm -f check_errors_bonus.o;\
+	fi
 
-$(LIB_NAME): $(OBJ)
-	ar rcs $(LIB_NAME) $(OBJ)
+bonus: .bonus
+
+.bonus: $(OBJ_BONUS)
+	$(CC) $(CFLAGS) $(OBJ_BONUS) $(LIBS) -o $(NAME)
+	@touch .bonus
+
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
-lclean:
-	rm -f $(LIB_NAME)
-
-clean: lclean
-	rm -f $(OBJ)
+clean:
+	rm -f $(OBJ) $(OBJ_BONUS) .bonus
 
 fclean: clean
 	rm -f $(NAME)

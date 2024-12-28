@@ -6,7 +6,7 @@
 /*   By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:35:20 by oayyoub           #+#    #+#             */
-/*   Updated: 2024/12/28 10:34:04 by oayyoub          ###   ########.fr       */
+/*   Updated: 2024/12/28 20:52:37 by oayyoub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,18 @@ static void	ft_player_move(t_game *game, int new_y, int new_x, int player_sprite
 		game->map.grid[last_y][last_x] = '0';
 		if (game->map.grid[new_y][new_x] == 'C')
 			game->map.coins--;
-		
 		if (!game->map.coins)
 			game->finish = 1;
 		game->player_direction = player_sprite;
 		(1) && (game->player_x = new_x, game->player_y= new_y);
 		game->map.grid[new_y][new_x] = 'P';
 		game->movements++;
+		_display_counter(game);
 		render_map(game);
 	}
 }
 
-int handle_keypress(int keycode, t_game *game)
+int	handle_keypress(int keycode, t_game *game)
 {
 	if (keycode == XK_Up || keycode == XK_w)
 		ft_player_move(game, game->player_y - 1, game->player_x, 1);
@@ -82,8 +82,7 @@ int	render_map(t_game *game)
 {
 	t_cord	cord;
 
-	(1) && (mlx_clear_window(game->mlx, game->win), cord.y = 0);
-	cord.y = 0;
+	(1) && (cord.y = 0);
 	while (cord.y < game->map.rows)
 	{
 		cord.x = 0;
@@ -105,5 +104,6 @@ int	render_map(t_game *game)
 		}
 		cord.y++;
 	}
+	_display_counter(game);
 	return (0);
 }

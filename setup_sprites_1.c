@@ -6,11 +6,11 @@
 /*   By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:27:45 by oayyoub           #+#    #+#             */
-/*   Updated: 2024/12/26 20:06:03 by oayyoub          ###   ########.fr       */
+/*   Updated: 2024/12/28 20:01:53 by oayyoub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "utils.h"
 
 void	*f_t_i(t_game *game, char *path)
 {

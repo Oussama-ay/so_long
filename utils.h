@@ -6,7 +6,7 @@
 /*   By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 13:02:16 by oayyoub           #+#    #+#             */
-/*   Updated: 2024/12/28 10:29:47 by oayyoub          ###   ########.fr       */
+/*   Updated: 2024/12/28 19:56:27 by oayyoub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,9 @@ void	draw_player(t_game *game, int x, int y);
 void	draw_boss(t_game *game, int x, int y);
 void	draw_exit(t_game *game, int x, int y);
 char	**ft_copy_map(t_game *game);
+void	load_sprites(t_game *game);
+void	delay_ms(long delay_time);
+int		validate_map(t_game *game);
+void	_display_counter(t_game *game);
 
 #endif

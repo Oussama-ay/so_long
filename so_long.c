@@ -6,7 +6,7 @@
 /*   By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:34:02 by oayyoub           #+#    #+#             */
-/*   Updated: 2024/12/28 21:54:42 by oayyoub          ###   ########.fr       */
+/*   Updated: 2025/01/03 08:45:38 by oayyoub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,24 @@ char	*ft_itoa(int n)
 	return (result);
 }
 
-void	_display_counter(t_game *game)
+int	_display_counter(t_game *game)
 {
 	char	*str;
 	char	*movements;
 
 	movements = ft_itoa(game->movements);
 	if (!movements)
-		return ;
+		return (0);
 	str = ft_strjoin("Movements: ", movements);
 	if (!str)
 	{
 		free(movements);
-		return ;
+		return (0);
 	}
 	mlx_string_put(game->mlx, game->win, 10, 10, 0x00FFFFFF, str);
 	free(movements);
 	free(str);
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -87,7 +88,7 @@ int	main(int ac, char **av)
 	open_window (&game);
 	load_sprites (&game);
 	mlx_hook(game.win, 17, 0, close_window, &game);
-	mlx_key_hook(game.win, handle_keypress, &game);
+	mlx_hook(game.win, 2, 1L << 0, handle_keypress, &game);
 	mlx_loop_hook(game.mlx, render_map, &game);
 	mlx_loop(game.mlx);
 	return (0);

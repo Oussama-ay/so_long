@@ -6,7 +6,7 @@
 /*   By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 14:03:51 by oayyoub           #+#    #+#             */
-/*   Updated: 2024/12/28 09:58:59 by oayyoub          ###   ########.fr       */
+/*   Updated: 2025/01/03 08:24:16 by oayyoub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	destroy_image(void *mlx, void **sprites)
 
 	i = 0;
 	if (!sprites)
-		return;
+		return ;
 	while (sprites[i])
 		mlx_destroy_image(mlx, sprites[i++]);
 	free(sprites);

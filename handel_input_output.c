@@ -6,7 +6,7 @@
 /*   By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:35:20 by oayyoub           #+#    #+#             */
-/*   Updated: 2024/12/28 20:52:37 by oayyoub          ###   ########.fr       */
+/*   Updated: 2025/01/03 08:29:04 by oayyoub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static int	finish_game(t_game *game, int x)
 	exit (1);
 }
 
-static void	ft_player_move(t_game *game, int new_y, int new_x, int player_sprite)
+static void	ft_player_move(t_game *game, int new_y, int new_x,
+		int player_sprite)
 {
 	int	last_x;
 	int	last_y;
@@ -41,7 +42,7 @@ static void	ft_player_move(t_game *game, int new_y, int new_x, int player_sprite
 		if (!game->map.coins)
 			game->finish = 1;
 		game->player_direction = player_sprite;
-		(1) && (game->player_x = new_x, game->player_y= new_y);
+		(1) && (game->player_x = new_x, game->player_y = new_y);
 		game->map.grid[new_y][new_x] = 'P';
 		game->movements++;
 		_display_counter(game);
@@ -82,7 +83,7 @@ int	render_map(t_game *game)
 {
 	t_cord	cord;
 
-	(1) && (cord.y = 0);
+	cord.y = 0;
 	while (cord.y < game->map.rows)
 	{
 		cord.x = 0;
@@ -104,6 +105,5 @@ int	render_map(t_game *game)
 		}
 		cord.y++;
 	}
-	_display_counter(game);
-	return (0);
+	return (_display_counter(game));
 }

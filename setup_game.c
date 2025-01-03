@@ -6,7 +6,7 @@
 /*   By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 14:59:32 by oayyoub           #+#    #+#             */
-/*   Updated: 2024/12/28 20:00:06 by oayyoub          ###   ########.fr       */
+/*   Updated: 2025/01/03 08:26:07 by oayyoub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	open_window(t_game *game)
 		return ;
 	}
 	game->win = mlx_new_window(game->mlx, (game->map.columns - 1) * 64,
-								game->map.rows * 64, WIN_TITLE);
+			game->map.rows * 64, WIN_TITLE);
 	if (!game->win)
 	{
 		print_error ("Error: Failed to create window\n");

@@ -6,7 +6,7 @@
 #    By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/18 21:29:09 by oayyoub           #+#    #+#              #
-#    Updated: 2024/12/28 21:08:51 by oayyoub          ###   ########.fr        #
+#    Updated: 2025/01/03 08:19:36 by oayyoub          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC =	so_long.c setup_game.c free_memory.c handel_input_output.c handel_input_ou
 		get_next_line.c get_next_line_utils.c read_the_map.c setup_sprites_1.c setup_sprites_2.c
 MANDATORY = check_errors.c
 BONUS = check_errors_bonus.c
-LIBS = -Lminilibx-linux -lmlx_Linux -lX11 -lXext
+LIBS = -L/home/oayyoub/includes/minilibx-linux -lmlx_Linux -lX11 -lXext
 OBJ = $(SRC:.c=.o) $(MANDATORY:.c=.o)
 OBJ_BONUS = $(SRC:.c=.o) $(BONUS:.c=.o)
 

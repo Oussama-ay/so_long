@@ -6,7 +6,7 @@
 /*   By: oayyoub <oayyoub@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:18:45 by oayyoub           #+#    #+#             */
-/*   Updated: 2024/12/28 19:58:58 by oayyoub          ###   ########.fr       */
+/*   Updated: 2025/01/03 09:05:39 by oayyoub          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_error(char *str)
 		write (2, str++, 1);
 }
 
-static int _lines_nbr(char *filename)
+static int	_lines_nbr(char *filename)
 {
 	int		lines;
 	char	*line;
@@ -46,8 +46,8 @@ static int _lines_nbr(char *filename)
 
 int	ft_strchr(char *s, char c)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -86,4 +86,25 @@ int	read_map(char *filename, t_game *game)
 	}
 	game->map.grid[i] = NULL;
 	return (close (fd), 1);
+}
+
+int	is_surrounded_by_walls(char **grid, int rows, int cols)
+{
+	int	i;
+
+	i = 0;
+	while (i < rows)
+	{
+		if (grid[i][0] != '1' || grid[i][cols - 1] != '1')
+			return (0);
+		i++;
+	}
+	i = 0;
+	while (i < cols)
+	{
+		if (grid[0][i] != '1' || grid[rows - 1][i] != '1')
+			return (0);
+		i++;
+	}
+	return (1);
 }
